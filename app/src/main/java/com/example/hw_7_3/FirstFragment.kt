@@ -37,8 +37,6 @@ class FirstFragment : Fragment() {
         }
     }
     private fun onItemClick(character: Character){
-        val bundle = Bundle()
-        bundle.putSerializable("kal", character)
-        findNavController().navigate(R.id.secondFragment, bundle)
+        findNavController().navigate(FirstFragmentDirections.actionFirstFragmentToSecondFragment(character))
     }
 }

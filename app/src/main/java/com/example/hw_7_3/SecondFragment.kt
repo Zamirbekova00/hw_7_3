@@ -11,6 +11,7 @@ import com.example.hw_7_3.databinding.FragmentSecondBinding
 
 class SecondFragment : Fragment() {
     private lateinit var binding: FragmentSecondBinding
+    private lateinit var navArgs: SecondFragmentArgs
 
 
     override fun onCreateView(
@@ -23,17 +24,13 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val result:Character = arguments?.getSerializable("kal") as Character
-
-        binding.apply {
-            tvCharactersName.text = result.name
-            tvCharacterStatus.text = result.status
-            imgSingleCharacter.setImageResource(result.image)
+        arguments?.let {
+            navArgs = SecondFragmentArgs.fromBundle(it)
         }
-    }
-    private fun onItemClick(character:Character){
-        val bundle = Bundle()
-        bundle.putSerializable("kal",character)
-        findNavController().navigate(R.id.secondFragment, bundle)
+        binding.apply {
+            tvCharactersName.text = navArgs.character.name
+            tvCharacterStatus.text = navArgs.character.status
+            imgSingleCharacter.setImageResource(navArgs.character.image)
+        }
     }
 }
